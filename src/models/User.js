@@ -14,23 +14,35 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "L'email est required"],
-        unique: true,
+        unique: [true, "email deja exist"],
         lowercase: true,
         trim: true
     },
     password: {
         type: String,
-        required: true,
-        minlength: 6
+        required: [true, "Le password est required"],
+        minlength: [6, "Le password doit contenir au moins 6 caractères"]
     },
     role: {
         type: String,
-        enum: ["ADMIN", "CHAUFFEUR"]
+        enum: ["SUPER_ADMIN", "ADMIN", "CHAUFFEUR"],
+        required: true
+    },
+    isValidated: {
+        type: Boolean,
+        default: false
     },
     statut: {
         type: String,
-        enum: ["ACTIF", "SUSPENDU"],
-        default: "ACTIF"
+        enum: ["EN_ATTENTE", "ACTIF", "REJETE", "SUSPENDU"],
+        default: "EN_ATTENTE"
+    },
+    validatedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    validatedAt: {
+        type: Date
     }
 },
     {
@@ -39,4 +51,4 @@ const userSchema = new mongoose.Schema({
 
 );
 
-module.exports = mongoose.Schema("User",userSchema);
+module.exports = mongoose.model("User", userSchema);
