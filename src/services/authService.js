@@ -42,6 +42,48 @@ const register = async ({ nom, prenom, email, password, role }) => {
 };
 
 
+const generateToken = (user) => {
+    return jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
+};
+
+
+const login = async ({ email, password }) => {
+    if (!email || !password) {
+        throw new Error("Email and password are required", 400);
+    }
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+
+    const isMatch = user && await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        throw new Error("Invalid email or password", 401);
+    }
+
+    if (user.statut === "EN_ATTENTE") throw new Error("Account pending validation", 403);
+    if (user.statut === "REJETE") throw new Error("Registration rejected", 403);
+    if (user.statut === "SUSPENDU") throw new Error("Account suspended", 403);
+
+    const token = generateToken(user);
+
+    return {
+        user: {
+            id: user._id,
+            nom: user.nom,
+            prenom: user.prenom,
+            email: user.email,
+            role: user.role,
+            statut: user.statut
+        },
+        token
+    };
+}
+
+
 module.exports = {
-    register
+    register,
+    login
 }
