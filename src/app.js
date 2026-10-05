@@ -1,5 +1,8 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes');
+const camionRoutes = require("./routes/camionRoutes");
+const remorqueRoutes = require("./routes/remorqueRoutes");
+const trajetRoutes = require("./routes/trajetRoutes");
 const app = express();
 
 app.use(express.json());
@@ -13,5 +16,17 @@ app.get('/', (req, res) => {
 
 // auth
 app.use("/api/auth", authRoutes);
+
+// camions
+app.use("/api/camions", camionRoutes);
+
+// remourque
+app.use("/api/remorques", remorqueRoutes);
+
+// trajets
+app.use("/api/trajets", trajetRoutes);
+
+
+
 
 module.exports = app
