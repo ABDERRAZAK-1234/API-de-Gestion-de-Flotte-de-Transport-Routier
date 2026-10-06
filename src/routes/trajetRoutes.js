@@ -8,7 +8,15 @@ const {
     deleteTrajet
 } = require("../controllers/trajetController");
 
+const {
+    authenticate,
+    authorize
+} = require("../middlewares/authMiddleware");
+
 const router = express.Router();
+
+router.use(authenticate);
+router.use(authorize("ADMIN", "SUPER_ADMIN"));
 
 router.post("/", createTrajet);
 router.get("/", getAllTrajets);
