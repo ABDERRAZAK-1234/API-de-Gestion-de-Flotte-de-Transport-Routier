@@ -13,15 +13,34 @@ const {
     authorize
 } = require("../middlewares/authMiddleware");
 
+const validate = require("../middlewares/validate");
+
+const {
+    createTrajetSchema,
+    updateTrajetSchema
+} = require("../validations/trajetValidation");
+
 const router = express.Router();
 
 router.use(authenticate);
 router.use(authorize("ADMIN", "SUPER_ADMIN"));
 
-router.post("/", createTrajet);
+router.post(
+    "/",
+    validate(createTrajetSchema),
+    createTrajet
+);
+
 router.get("/", getAllTrajets);
+
 router.get("/:id", getTrajetById);
-router.put("/:id", updateTrajet);
+
+router.put(
+    "/:id",
+    validate(updateTrajetSchema),
+    updateTrajet
+);
+
 router.delete("/:id", deleteTrajet);
 
 module.exports = router;
