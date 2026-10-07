@@ -13,15 +13,34 @@ const {
     authorize
 } = require("../middlewares/authMiddleware");
 
+const validate = require("../middlewares/validate");
+
+const {
+    createFuelSchema,
+    updateFuelSchema
+} = require("../validations/fuelValidation");
+
 const router = express.Router();
 
 router.use(authenticate);
 router.use(authorize("ADMIN", "SUPER_ADMIN"));
 
-router.post("/", createFuel);
+router.post(
+    "/",
+    validate(createFuelSchema),
+    createFuel
+);
+
 router.get("/", getAllFuels);
+
 router.get("/:id", getFuelById);
-router.put("/:id", updateFuel);
+
+router.put(
+    "/:id",
+    validate(updateFuelSchema),
+    updateFuel
+);
+
 router.delete("/:id", deleteFuel);
 
 module.exports = router;
