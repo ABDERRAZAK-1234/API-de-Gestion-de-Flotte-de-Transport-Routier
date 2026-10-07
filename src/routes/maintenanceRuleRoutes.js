@@ -13,15 +13,34 @@ const {
     authorize
 } = require("../middlewares/authMiddleware");
 
+const validate = require("../middlewares/validate");
+
+const {
+    createMaintenanceRuleSchema,
+    updateMaintenanceRuleSchema
+} = require("../validations/maintenanceRuleValidation");
+
 const router = express.Router();
 
 router.use(authenticate);
 router.use(authorize("ADMIN", "SUPER_ADMIN"));
 
-router.post("/", createMaintenanceRule);
+router.post(
+    "/",
+    validate(createMaintenanceRuleSchema),
+    createMaintenanceRule
+);
+
 router.get("/", getAllMaintenanceRules);
+
 router.get("/:id", getMaintenanceRuleById);
-router.put("/:id", updateMaintenanceRule);
+
+router.put(
+    "/:id",
+    validate(updateMaintenanceRuleSchema),
+    updateMaintenanceRule
+);
+
 router.delete("/:id", deleteMaintenanceRule);
 
 module.exports = router;
