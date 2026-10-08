@@ -24,7 +24,6 @@ const authenticate = async (req, res, next) => {
             });
         }
 
-        // n3awdo njibo l-user mn DB bach l-suspension tkhdem f nfs l-wa9t
         const user = await User.findById(decoded.id).select("_id role statut");
         if (!user || user.statut !== "ACTIF") {
             return res.status(403).json({
