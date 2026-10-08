@@ -6,12 +6,16 @@ const create = async (data) => {
 
 const findAll = async () => {
     return await Pneu.find()
-        .populate("camion","nom marque immatriculation");
+        .populate("camion", "nom marque immatriculation");
 };
 
 const findById = async (id) => {
     return await Pneu.findById(id)
-        .populate("camion","nom marque immatriculation");
+        .populate("camion", "nom marque immatriculation");
+};
+
+const countByCamion = async (camionId) => {
+    return await Pneu.countDocuments({ camion: camionId });
 };
 
 const update = async (id, data) => {
@@ -22,7 +26,7 @@ const update = async (id, data) => {
             new: true,
             runValidators: true
         }
-    ).populate("camion","nom marque immatriculation");
+    ).populate("camion", "nom marque immatriculation");
 };
 
 const remove = async (id) => {
@@ -33,6 +37,7 @@ module.exports = {
     create,
     findAll,
     findById,
+    countByCamion,
     update,
     remove
 };
