@@ -75,20 +75,13 @@ const updateRemorque = async (req, res, next) => {
 
 const deleteRemorque = async (req, res, next) => {
     try {
-        const remorque = await remorqueService.deleteRemorque(
-            req.params.id
-        );
-
-        if (!remorque) {
-            return res.status(404).json({
-                success: false,
-                message: "Remorque introuvable"
-            });
-        }
+        const remorque =
+            await remorqueService.deleteRemorque(req.params.id);
 
         res.status(200).json({
             success: true,
-            message: "Remorque supprimée avec succès"
+            message: "Remorque archivée avec succès",
+            data: remorque
         });
     } catch (error) {
         next(error);
