@@ -12,6 +12,10 @@ const findById = async (id) => {
     return await Remorque.findById(id);
 };
 
+const findByImmatriculation = async (immatriculation) => {
+    return await Remorque.findOne({ immatriculation });
+};
+
 const update = async (id, data) => {
     return await Remorque.findByIdAndUpdate(
         id,
@@ -23,14 +27,22 @@ const update = async (id, data) => {
     );
 };
 
-const remove = async (id) => {
-    return await Remorque.findByIdAndDelete(id);
+const archive = async (id) => {
+    return await Remorque.findByIdAndUpdate(
+        id,
+        { statut: "ARCHIVE" },
+        {
+            new: true,
+            runValidators: true
+        }
+    );
 };
 
 module.exports = {
     create,
     findAll,
     findById,
+    findByImmatriculation,
     update,
-    remove
+    archive
 };
