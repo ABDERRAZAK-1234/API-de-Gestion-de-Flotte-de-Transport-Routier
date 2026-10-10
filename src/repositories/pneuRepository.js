@@ -33,10 +33,15 @@ const remove = async (id) => {
     return await Pneu.findByIdAndDelete(id);
 };
 
+const findByCamion = async (camionId) => {
+    return await Pneu.find({ camion: camionId });
+};
+
 module.exports = {
     create,
     findAll,
     findById,
+    findByCamion,
     countByCamion,
     update,
     remove
