@@ -33,10 +33,30 @@ const remove = async (id) => {
     return await Maintenance.findByIdAndDelete(id);
 };
 
+const findOpenByCamion = async (camionId) => {
+    return await Maintenance.findOne({
+        camion: camionId,
+        statut: {
+            $in: ["EN_ATTENTE", "EN_COURS"]
+        }
+    });
+};
+
+const findOpenByRemorque = async (remorqueId) => {
+    return await Maintenance.findOne({
+        remorque: remorqueId,
+        statut: {
+            $in: ["EN_ATTENTE", "EN_COURS"]
+        }
+    });
+};
+
 module.exports = {
     create,
     findAll,
     findById,
     update,
-    remove
+    remove,
+    findOpenByCamion,
+    findOpenByRemorque
 };
