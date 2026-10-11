@@ -51,6 +51,32 @@ const findOpenByRemorque = async (remorqueId) => {
     });
 };
 
+const findOpenByTargetAndType = async (
+    targetField,
+    targetId,
+    type
+) => {
+    return await Maintenance.findOne({
+        [targetField]: targetId,
+        type,
+        statut: {
+            $in: ["EN_ATTENTE", "EN_COURS"]
+        }
+    });
+};
+
+const findLatestCompletedByTargetAndType = async (
+    targetField,
+    targetId,
+    type
+) => {
+    return await Maintenance.findOne({
+        [targetField]: targetId,
+        type,
+        statut: "TERMINEE"
+    }).sort({ kilometrage: -1 });
+};
+
 module.exports = {
     create,
     findAll,
@@ -58,5 +84,7 @@ module.exports = {
     update,
     remove,
     findOpenByCamion,
-    findOpenByRemorque
+    findOpenByRemorque,
+    findOpenByTargetAndType,
+    findLatestCompletedByTargetAndType
 };
