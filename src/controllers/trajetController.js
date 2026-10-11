@@ -2,7 +2,9 @@ const trajetService = require("../services/trajetService");
 
 const createTrajet = async (req, res, next) => {
     try {
-        const trajet = await trajetService.createTrajet(req.body);
+        const trajet = await trajetService.createTrajet(
+            req.body,
+            req.user);
 
         res.status(201).json({
             success: true,
@@ -16,7 +18,7 @@ const createTrajet = async (req, res, next) => {
 
 const getAllTrajets = async (req, res, next) => {
     try {
-        const trajets = await trajetService.getAllTrajets();
+        const trajets = await trajetService.getAllTrajets(req.user);
 
         res.status(200).json({
             success: true,
@@ -30,7 +32,8 @@ const getAllTrajets = async (req, res, next) => {
 const getTrajetById = async (req, res, next) => {
     try {
         const trajet = await trajetService.getTrajetById(
-            req.params.id
+            req.params.id,
+            req.user
         );
 
         if (!trajet) {
@@ -53,7 +56,8 @@ const updateTrajet = async (req, res, next) => {
     try {
         const trajet = await trajetService.updateTrajet(
             req.params.id,
-            req.body
+            req.body,
+            req.user
         );
 
         if (!trajet) {
