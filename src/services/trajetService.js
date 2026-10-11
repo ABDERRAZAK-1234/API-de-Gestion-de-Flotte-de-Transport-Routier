@@ -2,6 +2,7 @@ const trajetRepository = require("../repositories/trajetRepository");
 const camionRepository = require("../repositories/camionRepository");
 const remorqueRepository = require("../repositories/remorqueRepository");
 const availabilityService = require("./availabilityService");
+const maintenanceRuleService = require("./maintenanceRuleService");
 
 const createError = (message, statusCode) => {
     const error = new Error(message);
@@ -219,7 +220,6 @@ const updateTrajet = async (id, data, currentUser) => {
 
     const updateData = { ...data };
 
-    // Les dates réelles et la consommation sont contrôlées par le serveur.
     delete updateData.dateDepartReelle;
     delete updateData.dateArriveeReelle;
     delete updateData.consommation;
@@ -277,6 +277,17 @@ const updateTrajet = async (id, data, currentUser) => {
                 kilometrage:
                     (trajet.remorque.kilometrage || 0) + distance
             })
+        ]);
+
+        await Promise.all([
+            maintenanceRuleService.verifierAlertesVehicule(
+                "camion",
+                affectation.camion
+            ),
+            maintenanceRuleService.verifierAlertesVehicule(
+                "remorque",
+                affectation.remorque
+            )
         ]);
     }
 
