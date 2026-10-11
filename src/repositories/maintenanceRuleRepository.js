@@ -12,6 +12,10 @@ const findById = async (id) => {
     return await MaintenanceRule.findById(id);
 };
 
+const findActive = async () => {
+    return await MaintenanceRule.find({ active: true });
+};
+
 const update = async (id, data) => {
     return await MaintenanceRule.findByIdAndUpdate(
         id,
@@ -31,6 +35,7 @@ module.exports = {
     create,
     findAll,
     findById,
+    findActive,
     update,
     remove
 };
