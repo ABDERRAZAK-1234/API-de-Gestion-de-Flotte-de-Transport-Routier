@@ -23,24 +23,38 @@ const {
 const router = express.Router();
 
 router.use(authenticate);
-router.use(authorize("ADMIN", "SUPER_ADMIN"));
+
 
 router.post(
     "/",
+    authorize("ADMIN", "SUPER_ADMIN"),
     validate(createTrajetSchema),
     createTrajet
 );
 
-router.get("/", getAllTrajets);
+router.get(
+    "/",
+    authorize("ADMIN", "SUPER_ADMIN", "CHAUFFEUR"),
+    getAllTrajets
+);
 
-router.get("/:id", getTrajetById);
+router.get(
+    "/:id",
+    authorize("ADMIN", "SUPER_ADMIN", "CHAUFFEUR"),
+    getTrajetById
+);
 
 router.put(
     "/:id",
+    authorize("ADMIN", "SUPER_ADMIN", "CHAUFFEUR"),
     validate(updateTrajetSchema),
     updateTrajet
 );
 
-router.delete("/:id", deleteTrajet);
+router.delete(
+    "/:id",
+    authorize("ADMIN", "SUPER_ADMIN"),
+    deleteTrajet
+);
 
 module.exports = router;
