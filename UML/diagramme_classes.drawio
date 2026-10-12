@@ -1,0 +1,269 @@
+<mxfile host="Electron">
+  <diagram name="Diagramme de classes" id="Diagramme_de_classes">
+    <mxGraphModel dx="2348" dy="386" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="User" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="User" vertex="1">
+          <mxGeometry height="266" width="240" x="-1520" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="User_a" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+nom : String&lt;br&gt;+prenom : String&lt;br&gt;+email : String&lt;br&gt;+password : String&lt;br&gt;+role : Role&lt;br&gt;+statut : UserStatus&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="170" width="240" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="User_l" parent="User" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="240" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="User_m" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+login()&lt;br&gt;+suspend()&lt;br&gt;+reactivate()" vertex="1">
+          <mxGeometry height="62" width="240" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="Camion" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Camion" vertex="1">
+          <mxGeometry height="248" width="270" x="-1186" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="Camion_a" parent="Camion" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+immatriculation : String&lt;br&gt;+marque : String&lt;br&gt;+modele : String&lt;br&gt;+kilometrage : Number&lt;br&gt;+statut : VehicleStatus&lt;br&gt;+dateMiseEnService : Date&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="170" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Camion_l" parent="Camion" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="270" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="Camion_m" parent="Camion" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+verifierDisponibilite()&lt;br&gt;+calculerKilometrage()" vertex="1">
+          <mxGeometry height="44" width="270" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="Remorque" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Remorque" vertex="1">
+          <mxGeometry height="194" width="250" x="-880" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="Remorque_a" parent="Remorque" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+immatriculation : String&lt;br&gt;+type : String&lt;br&gt;+kilometrage : Number&lt;br&gt;+statut : VehicleStatus&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="134" width="250" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Remorque_l" parent="Remorque" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="250" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Remorque_m" parent="Remorque" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+verifierDisponibilite()" vertex="1">
+          <mxGeometry height="26" width="250" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="MaintenanceRule" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="MaintenanceRule" vertex="1">
+          <mxGeometry height="176" width="260" x="-560" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="MaintenanceRule_a" parent="MaintenanceRule" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+type : MaintenanceType&lt;br&gt;+seuilKilometrage : Number&lt;br&gt;+active : Boolean&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="116" width="260" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MaintenanceRule_l" parent="MaintenanceRule" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="260" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="MaintenanceRule_m" parent="MaintenanceRule" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+verifierSeuil()" vertex="1">
+          <mxGeometry height="26" width="260" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Trajet" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Trajet" vertex="1">
+          <mxGeometry height="410" width="280" x="-1540" y="433" as="geometry" />
+        </mxCell>
+        <mxCell id="Trajet_a" parent="Trajet" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+lieuDepart : String&lt;br&gt;+lieuArrivee : String&lt;br&gt;+marchandise : String&lt;br&gt;+dateDepartPrevue : Date&lt;br&gt;+dateArriveePrevue : Date&lt;br&gt;+dateDepartReelle : Date&lt;br&gt;+dateArriveeReelle : Date&lt;br&gt;+statut : TrajetStatus&lt;br&gt;+kilometrageDepart : Number&lt;br&gt;+kilometrageArrivee : Number&lt;br&gt;+volumeGasoil : Number&lt;br&gt;+consommation : Number&lt;br&gt;+remarque : String&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="296" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Trajet_l" parent="Trajet" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="Trajet_m" parent="Trajet" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+assigner()&lt;br&gt;+changerStatut()&lt;br&gt;+calculerDistance()&lt;br&gt;+calculerConsommation()" vertex="1">
+          <mxGeometry height="80" width="280" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Pneu" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Pneu" vertex="1">
+          <mxGeometry height="266" width="280" x="-1140" y="453" as="geometry" />
+        </mxCell>
+        <mxCell id="Pneu_a" parent="Pneu" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+reference : String&lt;br&gt;+marque : String&lt;br&gt;+position : String&lt;br&gt;+kilometrageInstallation : Number&lt;br&gt;+kilometrageUsure : Number&lt;br&gt;+seuilUsure : Number&lt;br&gt;+etat : PneuEtat&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="188" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Pneu_l" parent="Pneu" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="214" as="geometry" />
+        </mxCell>
+        <mxCell id="Pneu_m" parent="Pneu" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+verifierUsure()&lt;br&gt;+declencherAlerte()" vertex="1">
+          <mxGeometry height="44" width="280" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="Maintenance" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Maintenance" vertex="1">
+          <mxGeometry height="230" width="270" x="-760" y="453" as="geometry" />
+        </mxCell>
+        <mxCell id="Maintenance_a" parent="Maintenance" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+type : MaintenanceType&lt;br&gt;+date : Date&lt;br&gt;+kilometrage : Number&lt;br&gt;+description : String&lt;br&gt;+statut : MaintenanceStatus&lt;br&gt;+createdAt : Date&lt;br&gt;+updatedAt : Date" vertex="1">
+          <mxGeometry height="152" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Maintenance_l" parent="Maintenance" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="270" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="Maintenance_m" parent="Maintenance" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+traiter()&lt;br&gt;+verifierSeuil()" vertex="1">
+          <mxGeometry height="44" width="270" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="Fuel" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Fuel" vertex="1">
+          <mxGeometry height="158" width="230" x="-1515" y="949" as="geometry" />
+        </mxCell>
+        <mxCell id="Fuel_a" parent="Fuel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+_id : ObjectId&lt;br&gt;+volume : Number&lt;br&gt;+prix : Number&lt;br&gt;+date : Date&lt;br&gt;+kilometrage : Number" vertex="1">
+          <mxGeometry height="98" width="230" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Fuel_l" parent="Fuel" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="230" y="124" as="geometry" />
+        </mxCell>
+        <mxCell id="Fuel_m" parent="Fuel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="+calculerCout()" vertex="1">
+          <mxGeometry height="26" width="230" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="E_Role" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Role&lt;/b&gt;" vertex="1">
+          <mxGeometry height="106" width="170" x="-1160" y="893" as="geometry" />
+        </mxCell>
+        <mxCell id="E_Role_a" parent="E_Role" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="SUPER_ADMIN&lt;br&gt;ADMIN&lt;br&gt;CHAUFFEUR" vertex="1">
+          <mxGeometry height="62" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_UserStatus" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserStatus&lt;/b&gt;" vertex="1">
+          <mxGeometry height="88" width="170" x="-970" y="893" as="geometry" />
+        </mxCell>
+        <mxCell id="E_UserStatus_a" parent="E_UserStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="ACTIF&lt;br&gt;SUSPENDU" vertex="1">
+          <mxGeometry height="44" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_VehicleStatus" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;VehicleStatus&lt;/b&gt;" vertex="1">
+          <mxGeometry height="124" width="170" x="-780" y="893" as="geometry" />
+        </mxCell>
+        <mxCell id="E_VehicleStatus_a" parent="E_VehicleStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="DISPONIBLE&lt;br&gt;EN_SERVICE&lt;br&gt;MAINTENANCE&lt;br&gt;ARCHIVE" vertex="1">
+          <mxGeometry height="80" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_TrajetStatus" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TrajetStatus&lt;/b&gt;" vertex="1">
+          <mxGeometry height="106" width="170" x="-590" y="893" as="geometry" />
+        </mxCell>
+        <mxCell id="E_TrajetStatus_a" parent="E_TrajetStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="A_FAIRE&lt;br&gt;EN_COURS&lt;br&gt;TERMINE" vertex="1">
+          <mxGeometry height="62" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_PneuEtat" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PneuEtat&lt;/b&gt;" vertex="1">
+          <mxGeometry height="106" width="170" x="-1160" y="1043" as="geometry" />
+        </mxCell>
+        <mxCell id="E_PneuEtat_a" parent="E_PneuEtat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="BON&lt;br&gt;USE&lt;br&gt;A_REMPLACER" vertex="1">
+          <mxGeometry height="62" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_MaintenanceType" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MaintenanceType&lt;/b&gt;" vertex="1">
+          <mxGeometry height="106" width="170" x="-970" y="1043" as="geometry" />
+        </mxCell>
+        <mxCell id="E_MaintenanceType_a" parent="E_MaintenanceType" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="PNEU&lt;br&gt;VIDANGE&lt;br&gt;REVISION" vertex="1">
+          <mxGeometry height="62" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E_MaintenanceStatus" parent="1" style="swimlane;fontStyle=0;align=center;startSize=44;html=1;horizontal=1;collapsible=0;marginBottom=0;fillColor=#f8cecc;strokeColor=#b85450;" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MaintenanceStatus&lt;/b&gt;" vertex="1">
+          <mxGeometry height="106" width="170" x="-780" y="1043" as="geometry" />
+        </mxCell>
+        <mxCell id="E_MaintenanceStatus_a" parent="E_MaintenanceStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;html=1;whiteSpace=wrap;" value="EN_ATTENTE&lt;br&gt;EN_COURS&lt;br&gt;TERMINEE" vertex="1">
+          <mxGeometry height="62" width="170" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;" target="Trajet" value="réalise">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_s" connectable="0" parent="r1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r1_t" connectable="0" parent="r1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="1" source="Camion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="Trajet_a" value="assigné à">
+          <mxGeometry relative="1" x="-0.2525" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_s" connectable="0" parent="r2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8889" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2_t" connectable="0" parent="r2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.3838" as="geometry">
+            <mxPoint y="92" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="Trajet_a" value="assignée à">
+          <mxGeometry relative="1" x="-0.2253" as="geometry">
+            <Array as="points">
+              <mxPoint x="-775" y="23" />
+              <mxPoint x="-1560" y="23" />
+              <mxPoint x="-1560" y="533" />
+            </Array>
+            <mxPoint x="-775" y="53" as="sourcePoint" />
+            <mxPoint x="-1540" y="533.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3_s" connectable="0" parent="r3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8825" as="geometry">
+            <mxPoint x="54" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3_t" connectable="0" parent="r3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8897" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4" edge="1" parent="1" source="Camion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;" target="Pneu" value="possède">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_s" connectable="0" parent="r4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4_t" connectable="0" parent="r4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="Camion_m" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Maintenance" value="historique">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-810" y="279" />
+              <mxPoint x="-810" y="568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5_s" connectable="0" parent="r5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8455" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5_t" connectable="0" parent="r5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.8196" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="Remorque" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;" target="Maintenance" value="historique">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_s" connectable="0" parent="r6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6_t" connectable="0" parent="r6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7" edge="1" parent="1" source="MaintenanceRule" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="Maintenance" value="déclenche">
+          <mxGeometry relative="1" x="0.2575" as="geometry">
+            <Array as="points">
+              <mxPoint x="-430" y="568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7_s" connectable="0" parent="r7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8446" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7_t" connectable="0" parent="r7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.852" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8" edge="1" parent="1" source="Trajet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;startSize=14;endArrow=none;" target="Fuel" value="consommation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8_s" connectable="0" parent="r8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8_t" connectable="0" parent="r8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
