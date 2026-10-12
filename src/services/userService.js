@@ -170,11 +170,57 @@ const reactivateUser = async (id, currentUser) => {
     });
 };
 
+const getPendingUsers = async (currentUser) => {
+    let filter = {
+        statut: "EN_ATTENTE",
+        isValidated: false
+    };
+
+    if (currentUser.role === "ADMIN") {
+        filter.role = "CHAUFFEUR";
+    } else if (currentUser.role === "SUPER_ADMIN") {
+        filter.role = {
+            $in: ["ADMIN", "CHAUFFEUR"]
+        };
+    } else {
+        throw createError("Accès refusé", 403);
+    }
+
+    return await userRepository.findAll(filter);
+};
+
+const rejectUser = async (id, currentUser) => {
+    const user = await userRepository.findById(id);
+
+    if (!user) {
+        throw createError("Utilisateur introuvable", 404);
+    }
+
+    ensureCanManageUser(currentUser, user);
+
+    if (
+        user.statut !== "EN_ATTENTE" ||
+        user.isValidated
+    ) {
+        throw createError(
+            "Ce compte n'est pas en attente de validation",
+            409
+        );
+    }
+
+    return await userRepository.update(id, {
+        statut: "REJETE",
+        isValidated: false
+    });
+};
+
 module.exports = {
     getAllUsers,
     getUserById,
     updateUser,
     validateUser,
     suspendUser,
-    reactivateUser
+    reactivateUser,
+    getPendingUsers,
+    rejectUser
 };
