@@ -7,6 +7,8 @@ const pneuRoutes = require("./routes/pneuRoutes");
 const maintenanceRoutes = require('./routes/maintenanceRoutes');
 const fuelRoutes = require("./routes/fuelRoutes");
 const maintenanceRuleRoutes = require("./routes/maintenanceRuleRoutes");
+const userRoutes = require("./routes/userRoutes");
+
 const app = express();
 
 app.use(express.json());
@@ -41,5 +43,8 @@ app.use("/api/fuels", fuelRoutes);
 
 // maintenaceRule
 app.use("/api/maintenance-rules", maintenanceRuleRoutes);
+
+// users
+app.use("/api/users", userRoutes);
 
 module.exports = app
