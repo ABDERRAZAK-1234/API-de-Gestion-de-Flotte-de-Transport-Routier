@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const app = require("./src/app");
 const connectDB = require("./src/config/database");
 const { connectRedis } = require("./src/config/redis");
 
@@ -12,6 +11,8 @@ const startServer = async () => {
 
         // cnx redis
         await connectRedis();
+
+        const app = require("./src/app");
 
         app.listen(PORT, () => {
             console.log(`Server démarré sur le port ${PORT}`);
