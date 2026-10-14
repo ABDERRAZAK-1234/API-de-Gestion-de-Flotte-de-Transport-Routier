@@ -11,6 +11,12 @@ const userRoutes = require("./routes/userRoutes");
 // v2
 const v2Routes = require("./routes/v2");
 
+const {
+    authLimiter,
+    apiLimiter,
+    analyticsLimiter
+} = require("./middlewares/rateLimitMiddleware");
+
 const app = express();
 
 app.use(express.json());
@@ -23,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 // auth
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
 
 // camions
 app.use("/api/camions", camionRoutes);
@@ -57,7 +63,20 @@ app.get("/healthz/liveness", (req, res) => {
 });
 
 
-// v2
+
+const v2RateLimiter = (req, res, next) => {
+    const isAnalyticsRoute =
+        req.path === "/analytics" ||
+        req.path.startsWith("/analytics/");
+
+    if (isAnalyticsRoute) {
+        return analyticsLimiter(req, res, next);
+    }
+
+    return apiLimiter(req, res, next);
+};
+
+// V2
 app.use(
     "/api/v2",
     (req, res, next) => {
@@ -65,6 +84,7 @@ app.use(
         res.setHeader("X-API-Deprecated", "false");
         next();
     },
+    v2RateLimiter,
     v2Routes
 );
 
