@@ -16,6 +16,23 @@ const getDriversEcoPerformance = async (req, res, next) => {
     }
 };
 
+const getTiresHealthMatrix = async (req, res, next) => {
+    try {
+        const tires =
+            await analyticsService.getTiresHealthMatrix();
+
+        return res.status(200).json({
+            success: true,
+            count: tires.length,
+            data: tires
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+
 module.exports = {
-    getDriversEcoPerformance
+    getDriversEcoPerformance,
+    getTiresHealthMatrix
 };
