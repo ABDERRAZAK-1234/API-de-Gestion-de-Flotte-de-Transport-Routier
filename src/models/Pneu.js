@@ -41,8 +41,8 @@ const pneuSchema = new mongoose.Schema(
 
         seuilUsure: {
             type: Number,
-            required: true,
-            min: 0
+            min: 0,
+            default: 80000
         },
 
         etat: {
@@ -50,10 +50,22 @@ const pneuSchema = new mongoose.Schema(
             enum: [
                 "BON",
                 "USE",
-                "A_REMPLACER"
+                "A_REMPLACER",
+                "REMPLACE"
             ],
             default: "BON"
-        }
+        },
+
+        profondeurSculpture: {
+            type: Number,
+            required: true,
+            min: 0
+        },
+
+        archive: {
+            type: Boolean,
+            default: false
+        },
     },
     {
         timestamps: true
