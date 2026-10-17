@@ -17,4 +17,11 @@ router.get(
     analyticsController.getDriversEcoPerformance
 );
 
+router.get(
+    "/tires/health-matrix",
+    authenticate,
+    authorize("ADMIN", "SUPER_ADMIN"),
+    analyticsController.getTiresHealthMatrix
+);
+
 module.exports = router;
