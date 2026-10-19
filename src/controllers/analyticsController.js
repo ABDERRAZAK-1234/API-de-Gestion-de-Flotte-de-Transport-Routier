@@ -32,7 +32,29 @@ const getTiresHealthMatrix = async (req, res, next) => {
 };
 
 
+const getTripsFinancialEsg = async (req, res, next) => {
+    try {
+        const { startDate, endDate } = req.query;
+
+        const data = await analyticsService.getTripsFinancialEsg({
+            startDate,
+            endDate
+        });
+
+        return res.status(200).json({
+            success: true,
+            count: data.length,
+            data
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+
+
 module.exports = {
     getDriversEcoPerformance,
-    getTiresHealthMatrix
+    getTiresHealthMatrix,
+    getTripsFinancialEsg
 };
