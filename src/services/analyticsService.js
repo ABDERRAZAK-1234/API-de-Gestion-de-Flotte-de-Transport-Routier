@@ -2,7 +2,7 @@
 const analyticsRepository = require("../repositories/analyticsRepository");
 const pneuAnalyticsRepository = require("../repositories/pneuAnalyticsRepository");
 const tripsFinancialEsgRepository = require("../repositories/tripsFinancialEsgRepository");
-
+const fleetUtilizationRepository = require("../repositories/fleetUtilizationRepository");
 
 const getDriversEcoPerformance = async () => {
     return analyticsRepository.getDriversEcoPerformance();
@@ -62,8 +62,32 @@ const getTripsFinancialEsg = async ({
     return tripsFinancialEsgRepository.getTripsFinancialEsg(filters);
 };
 
+
+const getFleetUtilizationTrends = async ({ months = 12 } = {}) => {
+    const numberOfMonths = Number(months);
+
+    if (
+        !Number.isInteger(numberOfMonths) ||
+        numberOfMonths < 1 ||
+        numberOfMonths > 12
+    ) {
+        const error = new Error(
+            "months doit être un entier entre 1 et 12"
+        );
+
+        error.statusCode = 400;
+        throw error;
+    }
+
+    return fleetUtilizationRepository.getFleetUtilizationTrends({
+        months: numberOfMonths
+    });
+};
+
+
 module.exports = {
     getDriversEcoPerformance,
     getTiresHealthMatrix,
-    getTripsFinancialEsg
+    getTripsFinancialEsg,
+    getFleetUtilizationTrends
 };
