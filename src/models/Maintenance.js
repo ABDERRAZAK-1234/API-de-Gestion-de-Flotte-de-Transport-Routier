@@ -50,7 +50,17 @@ const maintenanceSchema = new mongoose.Schema(
                 "TERMINEE"
             ],
             default: "EN_ATTENTE"
-        }
+        },
+
+        dateDebut: {
+            type: Date,
+            default: null
+        },
+
+        dateFin: {
+            type: Date,
+            default: null
+        },
     },
     {
         timestamps: true
