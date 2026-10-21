@@ -52,9 +52,31 @@ const getTripsFinancialEsg = async (req, res, next) => {
 };
 
 
+const getFleetUtilizationTrends = async (req, res, next) => {
+    try {
+        const { months } = req.query;
+
+        const data =
+            await analyticsService.getFleetUtilizationTrends({
+                months
+            });
+
+        return res.status(200).json({
+            success: true,
+            count: data.length,
+            data
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+
+
 
 module.exports = {
     getDriversEcoPerformance,
     getTiresHealthMatrix,
-    getTripsFinancialEsg
+    getTripsFinancialEsg,
+    getFleetUtilizationTrends
 };
