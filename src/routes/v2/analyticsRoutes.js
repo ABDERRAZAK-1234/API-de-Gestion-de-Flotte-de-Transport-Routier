@@ -31,4 +31,11 @@ router.get(
     analyticsController.getTripsFinancialEsg
 );
 
+router.get(
+    "/fleet/utilization-trends",
+    authenticate,
+    authorize("ADMIN", "SUPER_ADMIN"),
+    analyticsController.getFleetUtilizationTrends
+);
+
 module.exports = router;
