@@ -207,11 +207,6 @@ describe("TrajetController", () => {
                 kilometrageDepart: 150000,
             };
 
-            const trajet = {
-                _id: "trajet-123",
-                ...body,
-            };
-
             const { req, res, next } = createMocks({
                 params: { id: "trajet-123" },
                 body,
@@ -261,6 +256,29 @@ describe("TrajetController", () => {
                     success: true,
                 }),
             );
+        });
+
+        it("devrait retourner 404 si le trajet est introuvable", async () => {
+            const { req, res, next } = createMocks({
+                params: { id: "trajet-123" },
+            });
+
+            trajetService.deleteTrajet.mockResolvedValue(null);
+
+            await deleteTrajet(req, res, next);
+
+            expect(trajetService.deleteTrajet).toHaveBeenCalledWith(req.params.id);
+
+            expect(res.status).toHaveBeenCalledWith(404);
+
+            expect(res.json).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    success: false,
+                    message: "Trajet introuvable",
+                })
+            );
+
+            expect(next).not.toHaveBeenCalled();
         });
     });
 });
