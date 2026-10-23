@@ -200,6 +200,44 @@ describe("TrajetController", () => {
                 }),
             );
         });
+
+        it("devrait retourner 404 si le trajet est introuvable", async () => {
+            const body = {
+                statut: "EN_COURS",
+                kilometrageDepart: 150000,
+            };
+
+            const trajet = {
+                _id: "trajet-123",
+                ...body,
+            };
+
+            const { req, res, next } = createMocks({
+                params: { id: "trajet-123" },
+                body,
+            });
+
+            trajetService.updateTrajet.mockResolvedValue(null);
+
+            await updateTrajet(req, res, next);
+
+            expect(trajetService.updateTrajet).toHaveBeenCalledWith(
+                req.params.id,
+                req.body,
+                req.user,
+            );
+
+            expect(res.status).toHaveBeenCalledWith(404);
+
+            expect(res.json).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    success: false,
+                    message: "Trajet introuvable",
+                })
+            );
+
+            expect(next).not.toHaveBeenCalled();
+        });
     });
 
     describe("deleteTrajet", () => {
