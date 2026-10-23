@@ -3,7 +3,7 @@ jest.mock("../../src/services/trajetService", () => ({
     getAllTrajets: jest.fn(),
     getTrajetById: jest.fn(),
     updateTrajet: jest.fn(),
-    deleteTrajet: jest.fn()
+    deleteTrajet: jest.fn(),
 }));
 
 const trajetService = require("../../src/services/trajetService");
@@ -13,19 +13,19 @@ const {
     getAllTrajets,
     getTrajetById,
     updateTrajet,
-    deleteTrajet
+    deleteTrajet,
 } = require("../../src/controllers/trajetController");
 
 const createMocks = ({
     body = {},
     params = {},
-    user = { id: "user-123", role: "ADMIN" }
+    user = { id: "user-123", role: "ADMIN" },
 } = {}) => {
     const req = { body, params, user };
 
     const res = {
         status: jest.fn().mockReturnThis(),
-        json: jest.fn()
+        json: jest.fn(),
     };
 
     const next = jest.fn();
@@ -43,12 +43,12 @@ describe("TrajetController", () => {
             const body = {
                 lieuDepart: "Youssoufia",
                 lieuArrivee: "Agadir",
-                marchandise: "Matériaux"
+                marchandise: "Matériaux",
             };
 
             const trajet = {
                 _id: "trajet-123",
-                ...body
+                ...body,
             };
 
             const { req, res, next } = createMocks({ body });
@@ -57,16 +57,18 @@ describe("TrajetController", () => {
 
             await createTrajet(req, res, next);
 
-            expect(trajetService.createTrajet)
-                .toHaveBeenCalledWith(req.body, req.user);
+            expect(trajetService.createTrajet).toHaveBeenCalledWith(
+                req.body,
+                req.user,
+            );
 
             expect(res.status).toHaveBeenCalledWith(201);
 
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
                     success: true,
-                    data: trajet
-                })
+                    data: trajet,
+                }),
             );
 
             expect(next).not.toHaveBeenCalled();
@@ -88,10 +90,7 @@ describe("TrajetController", () => {
 
     describe("getAllTrajets", () => {
         it("devrait retourner la liste des trajets", async () => {
-            const trajets = [
-                { _id: "trajet-1" },
-                { _id: "trajet-2" }
-            ];
+            const trajets = [{ _id: "trajet-1" }, { _id: "trajet-2" }];
 
             const { req, res, next } = createMocks();
 
@@ -99,16 +98,15 @@ describe("TrajetController", () => {
 
             await getAllTrajets(req, res, next);
 
-            expect(trajetService.getAllTrajets)
-                .toHaveBeenCalledWith(req.user);
+            expect(trajetService.getAllTrajets).toHaveBeenCalledWith(req.user);
 
             expect(res.status).toHaveBeenCalledWith(200);
 
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
                     success: true,
-                    data: trajets
-                })
+                    data: trajets,
+                }),
             );
         });
     });
@@ -118,24 +116,51 @@ describe("TrajetController", () => {
             const trajet = { _id: "trajet-123" };
 
             const { req, res, next } = createMocks({
-                params: { id: "trajet-123" }
+                params: { id: "trajet-123" },
             });
 
             trajetService.getTrajetById.mockResolvedValue(trajet);
 
             await getTrajetById(req, res, next);
 
-            expect(trajetService.getTrajetById)
-                .toHaveBeenCalledWith(req.params.id, req.user);
+            expect(trajetService.getTrajetById).toHaveBeenCalledWith(
+                req.params.id,
+                req.user,
+            );
 
             expect(res.status).toHaveBeenCalledWith(200);
 
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
                     success: true,
-                    data: trajet
+                    data: trajet,
+                }),
+            );
+        });
+        it("devrait retourner 404 si le trajet est introuvable", async () => {
+            const { req, res, next } = createMocks({
+                params: { id: "trajet-123" },
+            });
+
+            trajetService.getTrajetById.mockResolvedValue(null);
+
+            await getTrajetById(req, res, next);
+
+            expect(trajetService.getTrajetById).toHaveBeenCalledWith(
+                req.params.id,
+                req.user,
+            );
+
+            expect(res.status).toHaveBeenCalledWith(404);
+
+            expect(res.json).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    success: false,
+                    message: "Trajet introuvable",
                 })
             );
+
+            expect(next).not.toHaveBeenCalled();
         });
     });
 
@@ -143,37 +168,36 @@ describe("TrajetController", () => {
         it("devrait modifier un trajet et retourner 200", async () => {
             const body = {
                 statut: "EN_COURS",
-                kilometrageDepart: 150000
+                kilometrageDepart: 150000,
             };
 
             const trajet = {
                 _id: "trajet-123",
-                ...body
+                ...body,
             };
 
             const { req, res, next } = createMocks({
                 params: { id: "trajet-123" },
-                body
+                body,
             });
 
             trajetService.updateTrajet.mockResolvedValue(trajet);
 
             await updateTrajet(req, res, next);
 
-            expect(trajetService.updateTrajet)
-                .toHaveBeenCalledWith(
-                    req.params.id,
-                    req.body,
-                    req.user
-                );
+            expect(trajetService.updateTrajet).toHaveBeenCalledWith(
+                req.params.id,
+                req.body,
+                req.user,
+            );
 
             expect(res.status).toHaveBeenCalledWith(200);
 
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
                     success: true,
-                    data: trajet
-                })
+                    data: trajet,
+                }),
             );
         });
     });
@@ -181,24 +205,23 @@ describe("TrajetController", () => {
     describe("deleteTrajet", () => {
         it("devrait supprimer un trajet et retourner 200", async () => {
             const { req, res, next } = createMocks({
-                params: { id: "trajet-123" }
+                params: { id: "trajet-123" },
             });
 
             trajetService.deleteTrajet.mockResolvedValue({
-                _id: "trajet-123"
+                _id: "trajet-123",
             });
 
             await deleteTrajet(req, res, next);
 
-            expect(trajetService.deleteTrajet)
-                .toHaveBeenCalledWith(req.params.id);
+            expect(trajetService.deleteTrajet).toHaveBeenCalledWith(req.params.id);
 
             expect(res.status).toHaveBeenCalledWith(200);
 
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    success: true
-                })
+                    success: true,
+                }),
             );
         });
     });
