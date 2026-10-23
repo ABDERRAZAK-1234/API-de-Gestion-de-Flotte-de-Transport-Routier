@@ -8,6 +8,7 @@ const maintenanceRoutes = require('./routes/maintenanceRoutes');
 const fuelRoutes = require("./routes/fuelRoutes");
 const maintenanceRuleRoutes = require("./routes/maintenanceRuleRoutes");
 const userRoutes = require("./routes/userRoutes");
+const errorMiddleware = require("./middlewares/errorMiddleware");
 // v2
 const v2Routes = require("./routes/v2");
 
@@ -87,5 +88,8 @@ app.use(
     v2RateLimiter,
     v2Routes
 );
+
+
+app.use(errorMiddleware);
 
 module.exports = app
