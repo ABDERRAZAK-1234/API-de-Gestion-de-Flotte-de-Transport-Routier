@@ -256,6 +256,36 @@ describe("TrajetController", () => {
 
             expect(next).not.toHaveBeenCalled();
         });
+
+        it("devrait transmettre l'erreur au middleware", async() =>{
+            
+            const body = {
+                statut: "EN_COURS",
+                kilometrageDepart: 150000,
+            };
+
+            const { req, res, next} = createMocks({
+                params: {id: "trajet-123"},
+                body,
+            });
+
+            const error = new Error("Erreur serveur");
+
+            trajetService.updateTrajet.mockRejectedValue(error);
+
+            await updateTrajet(req, res, next);
+
+            expect(trajetService.updateTrajet).toHaveBeenCalledWith(
+                req.params.id,
+                req.body,
+                req.user,
+            );
+
+            expect(next).toHaveBeenCalledWith(error);
+
+            expect(res.status).not.toHaveBeenCalled();
+            expect(res.json).not.toHaveBeenCalled();
+        });
     });
 
     describe("deleteTrajet", () => {
