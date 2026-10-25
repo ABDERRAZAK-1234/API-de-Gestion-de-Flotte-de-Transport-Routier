@@ -134,7 +134,7 @@ const errorCases = [
         args: (req) => [req.params.id, req.body],
     },
     {
-        name: "deleteCamion",
+        name: "archiveCamion",
         controller: camionController.deleteCamion,
         method: "deleteCamion",
         request: idRequest,
