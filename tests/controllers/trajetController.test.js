@@ -109,6 +109,25 @@ describe("TrajetController", () => {
                 }),
             );
         });
+
+        it("devrait transmettre l'erreur au middleware", async() =>{
+            const trajets = [{ _id: "trajet-1" }, { _id: "trajet-2" }];
+
+            const { req, res, next} = createMocks();
+
+            const error = new Error("Erreur de serveur");
+
+            trajetService.getAllTrajets.mockRejectedValue(error);
+
+            await getAllTrajets(req, res, next);
+
+            expect(trajetService.getAllTrajets).toHaveBeenCalledWith(req.user);
+
+            expect(next).toHaveBeenCalledWith(error);
+
+            expect(res.status).not.toHaveBeenCalled();
+            expect(res.json).not.toHaveBeenCalled();
+        })
     });
 
     describe("getTrajetById", () => {
