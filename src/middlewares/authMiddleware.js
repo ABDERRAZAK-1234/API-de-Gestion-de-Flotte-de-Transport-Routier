@@ -1,30 +1,46 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const authenticate = async (req, res, next) => {
     try {
-        const header = req.headers.authorization;
-        if (!header || !header.startsWith("Bearer ")) {
+        // 1. Get token from Cookie or Authorization Header
+        const authHeader = req.headers.authorization;
+
+        const token =
+            req.cookies?.token ||
+            (authHeader?.startsWith("Bearer ")
+                ? authHeader.split(" ")[1]
+                : null);
+
+        if (!token) {
             return res.status(401).json({
                 success: false,
                 message: "Token manquant"
             });
         }
 
-        const token = header.split(" ")[1];
-
+        // 2. Verifie JWT
         let decoded;
+
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET);
         } catch (err) {
-            const message = err.name === "TokenExpiredError" ? "Token expiré" : "Token invalide";
+            const message =
+                err.name === "TokenExpiredError"
+                    ? "Token expiré"
+                    : "Token invalide";
+
             return res.status(401).json({
                 success: false,
                 message
             });
         }
 
-        const user = await User.findById(decoded.id).select("_id role statut");
+        // 3. Find user
+        const user = await User.findById(decoded.id)
+            .select("_id nom prenom email role statut");
+
         if (!user || user.statut !== "ACTIF") {
             return res.status(403).json({
                 success: false,
@@ -32,8 +48,17 @@ const authenticate = async (req, res, next) => {
             });
         }
 
-        req.user = { id: user._id, role: user.role };
+        // 4. Attach user to request
+        req.user = {
+            id: user._id,
+            nom: user.nom,
+            prenom: user.prenom,
+            email: user.email,
+            role: user.role
+        };
+
         next();
+
     } catch (error) {
         return res.status(500).json({
             success: false,
@@ -50,6 +75,7 @@ const authorize = (...roles) => {
                 message: "Accès refusé : rôle non autorisé"
             });
         }
+
         next();
     };
 };
