@@ -76,7 +76,7 @@ const updateCamion = async (req, res, next) => {
 const deleteCamion = async (req, res, next) => {
     try {
         const camion =
-            await camionService.deleteCamion(req.params.id);
+            await camionService.archiveCamion(req.params.id);
 
         res.status(200).json({
             success: true,
